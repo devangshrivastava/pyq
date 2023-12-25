@@ -1,2 +1,2 @@
 # pyq
-PYQ for IIT Jodhpur
+Previous Year Question paper and material for IIT Jodhpur
