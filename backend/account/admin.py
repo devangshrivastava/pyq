@@ -31,7 +31,7 @@ class UserAdmin(BaseUserAdmin):
             },
         ),
     ]
-    search_fields = ["email"]
+    search_fields = ["email"] #this will allow us to search user by email(check in admin page)
     ordering = ["email","id"]
     filter_horizontal = []
 
