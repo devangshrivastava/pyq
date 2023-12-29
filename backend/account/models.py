@@ -46,8 +46,8 @@ class User(AbstractBaseUser):
         unique=True,
     )
     name = models.CharField(max_length=255)
-    is_active = models.BooleanField(default=True) #our user is active when logged in
-    is_admin = models.BooleanField(default=False) #our user is not admin by default, this help us in creating superuser
+    is_active = models.BooleanField(default=True) # without this true, user can not login even though they have registered
+    is_admin = models.BooleanField(default=False) # our user is not admin by default, this help us in creating superuser
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
