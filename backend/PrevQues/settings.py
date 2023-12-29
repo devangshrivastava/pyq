@@ -1,5 +1,6 @@
 from pathlib import Path
 from datetime import timedelta
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -75,9 +76,9 @@ DATABASES = {
 }
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
-    ],
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.IsAuthenticated',
+    # ],
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
@@ -86,12 +87,12 @@ REST_FRAMEWORK = {
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_PORT = 587
-# EMAIL_HOST_USER = 'prevyearres@gmail.com'
-# EMAIL_HOST_PASSWORD = 'ydgujcwqodsyumgr'
-# EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'prevyearres@gmail.com'
+EMAIL_HOST_PASSWORD = 'ydgujcwqodsyumgr'
+EMAIL_USE_TLS = True  
 
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -157,6 +158,8 @@ SIMPLE_JWT = {
 }
 
 # CORS_ALLOW_ALL_ORIGINS = False
+
+PASSWORD_RESET_TIMEOUT = 900
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",  # Example: Allow access from a local development server
