@@ -28,28 +28,28 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         user = User.objects.create_user(**validated_data)
         
         # Generate a unique confirmation key
-        uid = urlsafe_base64_encode(force_bytes(user.id))
-        token = default_token_generator.make_token(user)
-        confirmation_key = f"{uid}:{token}"
+        # uid = urlsafe_base64_encode(force_bytes(user.id))
+        # token = default_token_generator.make_token(user)
+        # confirmation_key = f"{uid}:{token}"
 
-        # Send confirmation email
-        self.send_confirmation_email(user.email, confirmation_key)
+        # # Send confirmation email
+        # self.send_confirmation_email(user.email, confirmation_key)
 
         return user
 
-    def send_confirmation_email(self, email, confirmation_key):
-        # Construct the confirmation URL
-        confirmation_url = f"loacalhost:8000/confirm/{confirmation_key}/"
+    # def send_confirmation_email(self, email, confirmation_key):
+    #     # Construct the confirmation URL
+    #     confirmation_url = f"loacalhost:8000/confirm/{confirmation_key}/"
 
-        # Customize the email subject and body as needed
+    #     # Customize the email subject and body as needed
 
-        body = f'Click the following link to confirm your email registration: {confirmation_url}'
-        data = {
-        'subject':'Confirm your email registration',
-        'body':body,
-        'to_email':email
-        }
-        Util.send_email(data)
+    #     body = f'Click the following link to confirm your email registration: {confirmation_url}'
+    #     data = {
+    #     'subject':'Confirm your email registration',
+    #     'body':body,
+    #     'to_email':email
+    #     }
+    #     Util.send_email(data)
     
 
 

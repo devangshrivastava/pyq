@@ -162,6 +162,6 @@ SIMPLE_JWT = {
 PASSWORD_RESET_TIMEOUT = 900
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # Example: Allow access from a local development server
-    "http://127.0.0.1:9000",
+    "http://localhost:5173",  # Example: Allow access from a local development server
+    # "http://127.0.0.1:9000",
 ]

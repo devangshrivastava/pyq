@@ -1,36 +1,46 @@
-import { TextField, FormControlLabel, Checkbox, Button, Box, Alert } from '@mui/material';
+import { TextField, Button, Box, Alert, Typography } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {useRegisterUserMutation} from '../services/userAuthApi'
+import { storeToken } from '../services/LocalStorageService';
 
 
 export default function SignUp() {
-  const [error, setError] = useState({
-    status: false,
-    msg: "",
-    type: ""
-  })
+  const [server_error, setServerError] = useState({})
   const navigate = useNavigate();
-  const handleSubmit = (e) => {
+  const [registerUser, { isLoading }] = useRegisterUserMutation()
+ 
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
     const actualData = {
       name: data.get('name'),
       email: data.get('email'),
       password: data.get('password'),
-      password_confirmation: data.get('password_confirmation'),
-      tc: data.get('tc'),
+      password2: data.get('password2'),
+      // tc: data.get('tc'),
     }
-    if (actualData.name && actualData.email && actualData.password && actualData.password_confirmation && actualData.tc !== null) {
-      if (actualData.password === actualData.password_confirmation) {
-        console.log(actualData);
-        document.getElementById('registration-form').reset()
-        setError({ status: true, msg: "Registration Successful", type: 'success' })
-        navigate('/dashboard')
-      } else {
-        setError({ status: true, msg: "Password and Confirm Password Doesn't Match", type: 'error' })
+    const res = await registerUser(actualData)
+    // console.log(res)  
+    if (res.error) {
+      if (res.error.data.errors.password?.includes('Ensure this field has at least 6 characters.')) {
+        console.log('here')
+        setServerError({ password: ['Password must be at least 6 characters.'] });
+      } 
+      else if (res.error.data.errors.password2?.includes('Ensure this field has at least 6 characters.')) {
+        setServerError({ password2: ['Password must be at least 6 characters.'] });
       }
-    } else {
-      setError({ status: true, msg: "All Fields are Required", type: 'error' })
+      else {
+        setServerError(res.error.data.errors);
+      }
+      // console.log(res.error.data.errors)
+    }
+    if (res.data) {
+      // console.log(typeof (res.data))
+      // console.log(res.data)
+      storeToken(res.data.token)
+      // console.log('Navigating to dashboard')
+      navigate('/dashboard')
     }
   }
 
@@ -39,16 +49,29 @@ export default function SignUp() {
   return (
     <div>
       <Box component='form' noValidate sx={{ mt: 1 }} id='registration-form' onSubmit={handleSubmit}>
+        
         <TextField margin='normal' required fullWidth id='name' name='name' label='Name' />
+        {server_error.name ? <Typography style={{ fontSize: 12, color: 'red', paddingLeft: 10 }}>{server_error.name[0]}</Typography> : ""}
+        
         <TextField margin='normal' required fullWidth id='email' name='email' label='Email Address' />
+        {server_error.email ? <Typography style={{ fontSize: 12, color: 'red', paddingLeft: 10 }}>{server_error.email[0]}</Typography> : ""}
+        
         <TextField margin='normal' required fullWidth id='password' name='password' label='Password' type='password' />
-        <TextField margin='normal' required fullWidth id='password_confirmation' name='password_confirmation' label='Confirm Password' type='password' />
-        <FormControlLabel control={<Checkbox value="agree" color="primary" name="tc" id="tc" />} label="I agree to term and condition." />
+        {server_error.password ? <Typography style={{ fontSize: 12, color: 'red', paddingLeft: 10 }}>{server_error.password[0]}</Typography> : ""}
+        
+        <TextField margin='normal' required fullWidth id='password2' name='password2' label='Confirm Password' type='password' />
+        {server_error.password2 ? <Typography style={{ fontSize: 12, color: 'red', paddingLeft: 10 }}>{server_error.password2[0]}</Typography> : ""}
+        
+        
+        {/* <FormControlLabel control={<Checkbox value={true} color="primary" name="tc" id="tc" />} label="I agree to term and condition." />
+        {server_error.tc ? <span style={{ fontSize: 12, color: 'red', paddingLeft: 10 }}>{server_error.tc[0]}</span> : ""} */}
+        
         <Box textAlign='center'>
           <Button type='submit' variant='contained' sx={{ mt: 3, mb: 2, px: 5 }}>Join</Button>
         </Box>
-        {error.status ? <Alert severity={error.type}>{error.msg}</Alert> : ''}
+        {server_error.non_field_errors ? <Alert severity='error'>{server_error.non_field_errors[0]}</Alert> : ''}
       </Box>
+
     </div>
   )
 }

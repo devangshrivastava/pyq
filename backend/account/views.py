@@ -19,21 +19,20 @@ def get_tokens_for_user(user):
 
 
 class UserRegisterView(APIView):
+    renderer_classes = [UserRenderer]
     def post(self, request,format=None):
         serializer = UserRegistrationSerializer(data=request.data)
-        if serializer.is_valid(raise_exception=True):
-            user = serializer.save()
-            token = get_tokens_for_user(user)
-            return Response(
-                {"token":token,
-                "message": "User created successfully"},
-                status=status.HTTP_201_CREATED,
-            )
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        # return Response({'msg':"registration successful"})
-
-
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save()
+        token = get_tokens_for_user(user)
+        return Response(
+            {"token":token,
+            "message": "User created successfully"},
+            status=status.HTTP_201_CREATED,
+        )
+        
 class UserLoginView(APIView):
+    renderer_classes = [UserRenderer]
     def post(self, request, format=None):
         serializer = UserLoginSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
@@ -55,7 +54,7 @@ class UserLoginView(APIView):
             
 
 class UserProfileView(APIView):
-    # renderer_classes =[UserRenderer],
+    renderer_classes =[UserRenderer],
     permission_classes = [IsAuthenticated]
     def get(self, request, format=None):
         serializer = UserProfileSerializer(request.user)
