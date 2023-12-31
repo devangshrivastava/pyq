@@ -48,7 +48,7 @@ class UserLoginView(APIView):
                 )
             else:
                 return Response(
-                    {"error": {"non_field_errors": ["Invalid credentials"]}}, 
+                    {"errors": {"non_field_errors": ["Invalid credentials"]}}, 
                     status=status.HTTP_404_NOT_FOUND 
                 )
             
