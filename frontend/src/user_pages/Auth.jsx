@@ -2,7 +2,6 @@ import { Grid, Card, Tabs, Typography, Tab, Box } from '@mui/material';
 import { useState } from 'react';
 import SignUp from './SignUp';
 import Login from './Login';
-import { ShoppingBag } from '@mui/icons-material';
 
 
 const TabPanel = (props) => {

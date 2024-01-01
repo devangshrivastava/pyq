@@ -24,11 +24,10 @@ function App() {
         <BrowserRouter>
           <CssBaseline />
           <Routes>  
-            <Route path="/login" element={<Login />} />  
+          <Route path="/auth" element={access_token ? <Navigate to="/dashboard" /> : <Reg />} />
+
             <Route path="/reset-password" element={<ResetPassword />} />
-            <Route path="/password/reset/confirm/:uid/:token" element={<ResetPasswordConfirm />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/auth" element={access_token ? <Navigate to="/dashboard" /> : <Reg />} />
+            <Route path="/password/reset/confirm/:uid/:token" element={<ResetPasswordConfirm />} /> 
             <Route path="/sendpasswordresetemail" element={<SendPasswordResetEmail />} />
             <Route path="/change-password" element={<ChangePassword />} />
             

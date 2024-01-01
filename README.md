@@ -1,9 +1,14 @@
 # pyq
 Previous Year Question paper and material for IIT Jodhpur
 
-
-Logout facility banani h
+Accounts:
 email authenticate karna h
-
-
+change password
+reset password
 sso lagana h
+
+
+
+Core:
+
+Sabkuch banana h ☹️
