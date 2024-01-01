@@ -27,13 +27,11 @@ export default function Auth() {
   }
   return (
     <div>
-        <Grid container sx={{ height: '90vh' }}>
-            <Grid item lg={7} sm={5} sx={{
-
-            }}>
+        <Grid container sx={{ backgroundColor: '#001f3f', height: '100vh' }}>
+            <Grid item lg={7} sm={5}>
             </Grid>
             <Grid item lg={5} sm={7} xs={12}>
-                <Card sx={{ width: '100%', height: '100%' }}>
+                <Card sx={{ width: '100%', height: '100%', borderRadius: 0 }}>
                     <Box sx={{ mx: 3, height: 530 }}>
                         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                         <Tabs value={value} textColor='secondary' indicatorColor='secondary' onChange={handleChange}>
@@ -41,12 +39,23 @@ export default function Auth() {
                             <Tab label='SignUp' sx={{ textTransform: 'none', fontWeight: 'bold' }}></Tab>
                         </Tabs>
                         </Box>
-                        <TabPanel value={value} index={0}>
-                        <Login />
-                        </TabPanel>
-                        <TabPanel value={value} index={1}>
-                        <SignUp />
-                        </TabPanel>
+                        <Grid
+                          container
+                          spacing={0}
+                          direction="column"
+                          alignItems="center"
+                          justifyContent="center"
+                          style={{ minHeight: '100vh' }}
+                        >
+                          <Grid item>
+                            <TabPanel value={value} index={0}>
+                              <Login />
+                              </TabPanel>
+                              <TabPanel value={value} index={1}>
+                              <SignUp />
+                            </TabPanel>
+                          </Grid>
+                        </Grid>
                     </Box>
                 </Card>
             </Grid>

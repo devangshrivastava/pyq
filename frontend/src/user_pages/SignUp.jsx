@@ -18,10 +18,8 @@ export default function SignUp() {
       email: data.get('email'),
       password: data.get('password'),
       password2: data.get('password2'),
-      // tc: data.get('tc'),
     }
     const res = await registerUser(actualData)
-    // console.log(res)  
     if (res.error) {
       if (res.error.data.errors.password?.includes('Ensure this field has at least 6 characters.')) {
         console.log('here')
@@ -33,13 +31,9 @@ export default function SignUp() {
       else {
         setServerError(res.error.data.errors);
       }
-      // console.log(res.error.data.errors)
     }
     if (res.data) {
-      // console.log(typeof (res.data))
-      // console.log(res.data)
       storeToken(res.data.token)
-      // console.log('Navigating to dashboard')
       navigate('/dashboard')
     }
   }

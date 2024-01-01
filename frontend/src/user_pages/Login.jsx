@@ -4,6 +4,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useLoginUserMutation} from '../services/userAuthApi'
 import { getToken, storeToken } from '../services/LocalStorageService';
 import { useDispatch } from 'react-redux';
+import { setUserToken } from '../features/authSlice';
 
 
 export default function Login() {
@@ -29,17 +30,17 @@ export default function Login() {
       // console.log(typeof (res.data))
       console.log(res.data)
       storeToken(res.data.token)
-      // let { access_token } = getToken()
-      // dispatch(setUserToken({ access_token: access_token }))
+      let { access_token } = getToken()
+      dispatch(setUserToken({ access_token: access_token }))
       navigate('/dashboard')
     } 
   }
 
-  // let { access_token } = getToken()
+  let { access_token } = getToken()
   
-  // useEffect(() => { 
-  //   dispatch(setUserToken({ access_token: access_token }))
-  // }, [access_token, dispatch])
+  useEffect(() => { 
+    dispatch(setUserToken({ access_token: access_token }))
+  }, [access_token, dispatch])
 
 
   return (
