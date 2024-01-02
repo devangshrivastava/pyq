@@ -15,9 +15,7 @@ export default function Dashboard() {
   const handleLogout = () => {
     dispatch(unsetUserInfo({ name: "", email: "" }))
     dispatch(unSetUserToken({ access_token: null }))
-    console.log('ok1')
     removeToken()
-    console.log('ok2')
     navigate('/auth')
   }
   

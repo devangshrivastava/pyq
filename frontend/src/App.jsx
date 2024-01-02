@@ -13,7 +13,7 @@ import ChangePassword from "./user_pages/ChangePassword";
 import Home from "./core_pages/Home";
 import { useSelector } from "react-redux";
 import Layout from "./core_pages/Layout";
-
+import AllCourses from "./core_pages/AllCourses";
 
 function App() {
   const { access_token } = useSelector((state) => state.auth);
@@ -32,8 +32,10 @@ function App() {
             <Route path="/change-password" element={<ChangePassword />} />
             
             <Route path="/" element={access_token ? <Layout /> : <Navigate to="/auth" />}>
+            {/* <Route path="/" element={access_token ? <Layout /> : <Navigate to="/auth" />}></Route>   */}
               <Route path="/home" element={<Home />} />
               <Route path="/dashboard" element={ <Dashboard />} />
+              <Route path="/courses" element={<AllCourses />} />
             </Route>
           
           
