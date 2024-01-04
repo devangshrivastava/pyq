@@ -31,8 +31,9 @@ function App() {
             <Route path="/sendpasswordresetemail" element={<SendPasswordResetEmail />} />
             <Route path="/change-password" element={<ChangePassword />} />
             
+            {/* <Route path="/" element={access_token ? <Layout /> : <Navigate to="/auth" />}> */}
             <Route path="/" element={access_token ? <Layout /> : <Navigate to="/auth" />}>
-            {/* <Route path="/" element={access_token ? <Layout /> : <Navigate to="/auth" />}></Route>   */}
+                
               <Route path="/home" element={<Home />} />
               <Route path="/dashboard" element={ <Dashboard />} />
               <Route path="/courses" element={<AllCourses />} />
