@@ -16,9 +16,21 @@ export const coreApi = createApi({
             }
             }
         }
-        }),
+      }),
+      files: builder.query({
+        query: () => {
+            return {
+            url: 'courses/',
+            method: 'GET',
+            // body: user, 
+            headers: {
+                'Content-type': 'application/json',
+            }
+            }
+        }
+      }),
   }),
 })
 
 
-export const { useRegisterUserMutation, useAllCoursesQuery } = coreApi
+export const { useAllCoursesQuery, useFilesQuery } = coreApi
