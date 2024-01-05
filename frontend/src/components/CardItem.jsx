@@ -12,7 +12,7 @@ export default function CardItem({course}) {
         <div className="ag-courses-item_bg"></div>
 
         <div className="ag-courses-item_title">
-          &amp;&#160; 
+          {/* &amp;&#160;  */}
           {course.course_id}
           
         </div>
