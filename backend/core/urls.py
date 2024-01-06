@@ -6,5 +6,5 @@ from . import views
 urlpatterns = [
     path('courses/',views.getCourses,name="courses"),
     path('courses/<str:pk>/',views.getCourse,name="course"),
-    path('courses/<str:course_id>/<str:type>/',views.getFiles,name="Files")
+    path('courses/<str:course_id>/<str:type>/',views.getFiles,name="files")
 ]

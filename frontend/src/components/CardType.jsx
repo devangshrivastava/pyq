@@ -2,7 +2,8 @@ import React from 'react'
 import './Card.css'
 import {Link} from 'react-router-dom'
 
-export default function CardType({type,course_id}) {
+export default function CardType({type,course_id}){
+  
 //   console.log(course)
   return (
     <div className="ag-courses_item">

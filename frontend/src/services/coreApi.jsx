@@ -18,14 +18,16 @@ export const coreApi = createApi({
         }
       }),
       files: builder.query({
-        query: () => {
+        query: (obj) => {
+          // console.log(obj);
+          const {id,type} = obj;
+          // console.log(id,type);
             return {
-            url: 'courses/',
+            url:  `courses/${id}/${type}/`,
             method: 'GET',
-            // body: user, 
             headers: {
                 'Content-type': 'application/json',
-            }
+              }
             }
         }
       }),

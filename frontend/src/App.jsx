@@ -11,7 +11,8 @@ import Home from "./core_pages/Home";
 import { useSelector } from "react-redux";
 import Layout from "./core_pages/Layout";
 import AllCourses from "./core_pages/AllCourses";
-import Course from "./core_pages/Course";
+import Type from "./core_pages/Type";
+import TypeFile from "./core_pages/TypeFile";
 
 function App() {
   const { access_token } = useSelector((state) => state.auth);
@@ -35,7 +36,8 @@ function App() {
               <Route path="/home" element={<Home />} />
               <Route path="/dashboard" element={ <Dashboard />} />
               <Route path="/courses" element={<AllCourses />} />
-              <Route path = "/courses/:id" exact element = {<Course/>}/>
+              <Route path = "/courses/:id" exact element = {<Type/>}/>
+              <Route path = "/courses/:id/:type" exact element = {<TypeFile/>}/>
             </Route>
           
           

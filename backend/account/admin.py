@@ -1,6 +1,7 @@
 from django.contrib import admin
 from account.models import User
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from account.models import UserChoices
 # Register your models here so that they appear on the admin page
 
 
@@ -39,3 +40,4 @@ class UserAdmin(BaseUserAdmin):
 # Now register the new UserAdmin...
 # It tells Django's admin site to use the UserAdmin class for the administration of the User model.
 admin.site.register(User, UserAdmin)
+admin.site.register(UserChoices)

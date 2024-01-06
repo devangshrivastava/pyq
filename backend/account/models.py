@@ -85,3 +85,9 @@ class User(AbstractBaseUser):
 # So we have created a separate class for usermanager which focuses on creation and different management for example if it's admin or not.
 # Whereas user class will focus on creating fields and related things.
 # It is a design pattern followed by django.
+    
+
+
+class UserChoices(models.Model):
+    email = models.ForeignKey(User, verbose_name="user", on_delete=models.CASCADE, related_name="choices", blank=False)
+    courseID = models.CharField(max_length=100,blank=False)

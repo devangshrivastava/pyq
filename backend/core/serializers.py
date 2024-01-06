@@ -11,4 +11,6 @@ class CourseSerializer(ModelSerializer):
 class FileSerializer(ModelSerializer):
     class Meta:
         model = File
-        fields = '__all__'
+        # fields = '__all__'
+        fields = ['course_id', 'file_type', 'file_nme']
+        
