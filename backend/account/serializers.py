@@ -4,6 +4,7 @@ from django.utils.encoding import smart_str, force_bytes, DjangoUnicodeDecodeErr
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator, default_token_generator 
 from account.utils import *
+from account.models import UserChoices
 # from account.utils import Util
 
 
@@ -51,11 +52,6 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
     #     }
     #     Util.send_email(data)
     
-
-
-
-
-
 class UserLoginSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(max_length=255)
     class Meta:
@@ -134,4 +130,10 @@ class UserPasswordResetSerializer(serializers.Serializer):
     except DjangoUnicodeDecodeError as identifier:
       PasswordResetTokenGenerator().check_token(user, token)
       raise serializers.ValidationError('Token is not Valid or Expired')
-  
+
+class UserChoicesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserChoices
+        fields = ['email', 'course_id']
+
+

@@ -19,6 +19,7 @@ export default function Type({course}) {
                         <CardType  type="Majors/Minors" course_id={id} />
                     </div>
                 </div>
+                
             </div>
         </div>
     </div>

@@ -90,4 +90,4 @@ class User(AbstractBaseUser):
 
 class UserChoices(models.Model):
     email = models.ForeignKey(User, verbose_name="user", on_delete=models.CASCADE, related_name="choices", blank=False)
-    courseID = models.CharField(max_length=100,blank=False)
+    course_id = models.CharField(max_length=100,blank=False)
