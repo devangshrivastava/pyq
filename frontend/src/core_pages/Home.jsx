@@ -1,39 +1,4 @@
-// import React from 'react'
-// import { useChoicesQuery} from '../services/userAuthApi';
-// import { getToken } from '../services/LocalStorageService';
-// import CardCourse from '../components/CardCourse';
-
-
-// export default function Home(){
-//   const { access_token } = getToken()
-//   // console.log(access_token);
-//   const choices = useChoicesQuery(access_token);
-//   // console.log(choices.data);
-//   console.log(choices.data);
-  
-
-//   if(choices.isLoading) return <div>Loading...</div>
-//   if(choices.isError) return <div>Error</div>
-//   return (
-//     <div>
-//       <div className='items-center top-0 mb-5'>
-//             <div className='w-5/6 mx-auto mt-8' >
-//                 <div className='grid sm:grid-cols-2 md:grid-cols-3'>
-//                 {choices.data.map((choice, index) => (
-//                     choice ? (
-//                     <CardCourse key={index} course={ choice }/>
-//                             ) : null
-//                         ))}
-//                 </div>
-//             </div>
-//         </div>
-//     </div>
-//   )
-// }
-
-
 import { Button, CssBaseline, Grid, Typography } from '@mui/material';
-
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { unSetUserToken } from '../features/authSlice';
@@ -57,11 +22,10 @@ export default function Dashboard() {
   const dispatch = useDispatch()
   const { access_token } = getToken()
   const { data, isSuccess } = useGetLoggedUserQuery(access_token)
-
+  console.log(data);
   const choices = useChoicesQuery(access_token)
-  console.log(choices.data);
+  // console.log(choices.data);
 
-  
 
   const [userData, setUserData] = useState({
     email: "",
@@ -78,15 +42,17 @@ export default function Dashboard() {
     }
   }, [data, isSuccess])
 
-  // // Store User Data in Redux Store
+  // Store User Data in Redux Store
   useEffect(() => {
     if (data && isSuccess) {
       dispatch(setUserInfo({
         email: data.email,
-        name: data.name
+        name: data.name,
+        courses: data.courses,
       }))
     }
   }, [data, isSuccess, dispatch])
+
   return (
     <div>
       <CssBaseline />
@@ -98,7 +64,6 @@ export default function Dashboard() {
             <Button variant='contained' color='warning' size='large' onClick={handleLogout} sx={{ mt: 8 }}>Logout</Button>
           </Grid>
           <Grid item sm={8}>
-            {/* <ChangePassword /> */}
           </Grid>
         </Grid>
         

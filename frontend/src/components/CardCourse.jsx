@@ -3,7 +3,7 @@ import './Card.css'
 import {Link} from 'react-router-dom'
 
 export default function CardCourse({course}) {
-  console.log(course);
+  // console.log(course);
   return (
     <div className="ag-courses_item">
         <Link 

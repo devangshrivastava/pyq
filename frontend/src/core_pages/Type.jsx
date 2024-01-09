@@ -1,12 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react';
 import {Link} from 'react-router-dom'
 import { useParams } from 'react-router-dom';
 import CardType from '../components/CardType';
+import Switch from '@mui/material/Switch';
 
 export default function Type({course}) {
     const { id } = useParams();
     console.log(id);
     
+    const [selected, setSelected] = useState(false);
+    const handleSwitchChange = () => {
+      setSelected(!selected);
+    };
+
+
+
+    
+    console.log(selected);
   return (
     <div>
        <div className="ag-courses_item">
@@ -19,7 +29,14 @@ export default function Type({course}) {
                         <CardType  type="Majors/Minors" course_id={id} />
                     </div>
                 </div>
-                
+                <div>
+                  {/* here */}
+                  <Switch
+                    checked={selected}
+                    onChange={handleSwitchChange}
+                    inputProps={{ 'aria-label': 'Switch' }}
+                  />
+                </div>
             </div>
         </div>
     </div>
