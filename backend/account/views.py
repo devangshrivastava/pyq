@@ -96,6 +96,7 @@ class UserCoursesUpdateView(APIView):
    renderer_classes = [UserRenderer]
    permission_classes = [IsAuthenticated]
    def put(self, request, format=None):
+        print(request.data)
         serializer = UserCoursesUpdateSerializer(data=request.data, context={'user': request.user})
         serializer.is_valid(raise_exception=True)
         return Response({'msg': 'Courses Updated Successfully'}, status=status.HTTP_200_OK)

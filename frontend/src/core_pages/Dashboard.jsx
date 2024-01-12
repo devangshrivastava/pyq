@@ -9,7 +9,7 @@ export default function Home(){
   const { access_token } = getToken()
   // const choices = useChoicesQuery(access_token);
   // console.log(choices.data);
-  const userInfo = useSelector((state) => state.user.email);
+  const userInfo = useSelector((state) => state.user.courses);
   console.log(userInfo);
 
   

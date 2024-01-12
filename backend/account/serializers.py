@@ -5,6 +5,8 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator, default_token_generator 
 from account.utils import *
 from account.models import UserChoices
+from django.contrib.postgres.fields import ArrayField
+
 # from account.utils import Util
 
 
@@ -137,13 +139,21 @@ class UserChoicesSerializer(serializers.ModelSerializer):
         fields = ['email', 'course_id']
 
 class UserCoursesUpdateSerializer(serializers.ModelSerializer):
-    courses = serializers.CharField(max_length=255)
+    courses = serializers.ListField(child=serializers.CharField(max_length=100))
     class Meta:
         model = User
         fields = ['courses']
 
-    def save(self, attrs):
+    def validate(self, attrs):
+        # print(attrs)
+        # attrs = kwargs.get('attrs', {})
+        courses = attrs.get('courses')
         user = self.context.get('user')
-        user_profile = User.objects.get(user=user)
-        user_profile.courses = self.validated_data['courses']
-        user_profile.save()
+        
+        if courses is not None and user is not None:
+            user.courses = courses
+            user.save()
+            return user
+        else:
+            raise serializers.ValidationError("Invalid data or user not provided.")
+      

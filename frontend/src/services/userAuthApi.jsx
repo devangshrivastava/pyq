@@ -40,6 +40,7 @@ export const userAuthApi = createApi({
         }
       }
     }),
+
     choices: builder.query({
       query: (access_token) => {
           return {
@@ -64,6 +65,22 @@ export const userAuthApi = createApi({
         }
       }
     }),
+
+    updateCourse: builder.mutation({
+      query: ({ actualData, access_token }) => {
+        console.log("inside updateCourse");
+        console.log(actualData);
+        return {
+          url: 'select-courses/',
+          method: 'PUT',
+          body: actualData,
+          headers: {
+            'authorization': `Bearer ${access_token}`,
+          }
+        }
+      }
+    }),
+
     sendPasswordResetEmail: builder.mutation({
       query: (user) => {
         return {
@@ -92,4 +109,4 @@ export const userAuthApi = createApi({
 })
 
 export const { useRegisterUserMutation, useLoginUserMutation, useGetLoggedUserQuery, 
-  useChangeUserPasswordMutation, useSendPasswordResetEmailMutation, useResetPasswordMutation, useChoicesQuery } = userAuthApi
+  useChangeUserPasswordMutation, useSendPasswordResetEmailMutation, useResetPasswordMutation, useChoicesQuery, useUpdateCourseMutation } = userAuthApi

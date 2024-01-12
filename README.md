@@ -6,7 +6,7 @@ email authenticate karna h
 change password
 reset password
 sso lagana h
-Ye ache se kaam nhi kar rha to dekhna h
+Ye ache se kaam nhi kar rha to dekhna h --> refesh token nhi kara
 
 
 
