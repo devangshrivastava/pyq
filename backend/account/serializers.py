@@ -136,4 +136,14 @@ class UserChoicesSerializer(serializers.ModelSerializer):
         model = UserChoices
         fields = ['email', 'course_id']
 
+class UserCoursesUpdateSerializer(serializers.ModelSerializer):
+    courses = serializers.CharField(max_length=255)
+    class Meta:
+        model = User
+        fields = ['courses']
 
+    def save(self, attrs):
+        user = self.context.get('user')
+        user_profile = User.objects.get(user=user)
+        user_profile.courses = self.validated_data['courses']
+        user_profile.save()

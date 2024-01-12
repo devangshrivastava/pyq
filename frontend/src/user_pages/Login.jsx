@@ -22,13 +22,9 @@ export default function Login() {
     }
     const res = await loginUser(actualData)
     if (res.error) {
-      // console.log(typeof (res.error.data.errors))
-      // console.log(res.error.data.errors)
       setServerError(res.error.data.errors)
     }
     if (res.data) {
-      // console.log(typeof (res.data))
-      // console.log(res.data)
       storeToken(res.data.token)
       let { access_token } = getToken()
       dispatch(setUserToken({ access_token: access_token }))
@@ -45,9 +41,6 @@ export default function Login() {
 
   return (
     <div>
-      {/* {server_error.non_field_errors ? console.log(server_error.non_field_errors[0]) : ""}
-      {server_error.email ? console.log(server_error.email[0]) : ""}
-      {server_error.password ? console.log(server_error.password[0]) : ""} */}
       <Box component='form' noValidate sx={{ mt: 1 }} id='login-form' onSubmit={handleSubmit}>
         <TextField margin='normal' required fullWidth id='email' name='email' label='Email Address' />
         {server_error.email ? <Typography style={{ fontSize: 12, color: 'red', paddingLeft: 10 }}>{server_error.email[0]}</Typography> : ""}

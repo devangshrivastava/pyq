@@ -6,6 +6,7 @@ import { getToken, removeToken } from '../services/LocalStorageService';
 import { useEffect, useState } from 'react';
 import { useGetLoggedUserQuery, useChoicesQuery} from '../services/userAuthApi';
 import { setUserInfo, unsetUserInfo } from '../features/userSlice';
+import  ChangePassword  from '../user_pages/ChangePassword';
 // import { ChangePassword } from '../user_pages/ChangePassword';
 
 
@@ -55,7 +56,8 @@ export default function Dashboard() {
 
   return (
     <div>
-      <CssBaseline />
+      <div className='mb-5'>
+        <CssBaseline />
         <Grid container>
           <Grid item sm={4} sx={{ backgroundColor: 'gray', p: 5, color: 'white' }}>
             <h1>Dashboard</h1>
@@ -66,6 +68,8 @@ export default function Dashboard() {
           <Grid item sm={8}>
           </Grid>
         </Grid>
+      </div>
+      <ChangePassword />
         
 
     </div>
