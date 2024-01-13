@@ -3,10 +3,18 @@ from .models import Courses
 from .models import File 
 
 
+class AllCourseSerializer(ModelSerializer):
+    class Meta:
+        model = Courses
+        fields = '__all__'
+
+
 class CourseSerializer(ModelSerializer):
     class Meta:
         model = Courses
         fields = '__all__'
+
+
 
 class FileSerializer(ModelSerializer):
     class Meta:

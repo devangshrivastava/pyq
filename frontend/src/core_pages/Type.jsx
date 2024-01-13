@@ -4,44 +4,45 @@ import { useParams } from 'react-router-dom';
 import CardType from '../components/CardType';
 import Switch from '@mui/material/Switch';
 import { useUpdateCourseMutation } from '../services/userAuthApi';
-import { getToken } from '../services/LocalStorageService'
+import { getToken, getCourses, storeCourses } from '../services/LocalStorageService'
 
 export default function Type({course}) {
     const { id } = useParams();
-    // console.log(id);
-    
-    const [selected, setSelected] = useState(false);
+
+    const courses = getCourses()
+
+    let isChosen = false
+
+    if (courses.includes(id)) {
+      console.log("if");
+      isChosen = true
+    }
+
+    const [selected, setSelected] = useState(isChosen);
     const handleSwitchChange = () => {
       setSelected(!selected);
     };
 
     const [updateCourse] = useUpdateCourseMutation()
     const { access_token } = getToken()
-    const actualData = {"courses":["Course1", "Course2", "Course3"]};
-    const actualData2 = {"courses":["REMOVED"]};
-    const handleSubmit = async (event) => {
+    const handleSubmit = async (event) =>{
       
-      if (selected) {
-        // Add the course to the actual data
-
+      if (!selected) {
+        courses.push(id);
+        const actualData = {"courses":courses};
         await updateCourse({actualData: actualData, access_token });
+        storeCourses(courses);
       } 
-      
       else {
-        // Remove the course from the actual data
-        // const updatedData = actualData.filter((courseId) => courseId !== id);
-        // Use your mutation function to update the course data on the server
-        // console.log(actualData2);
-        await updateCourse({actualData: actualData2, access_token });
+        const actualData = {"courses":courses.filter(item => item !== id)};
+        await updateCourse({actualData: actualData, access_token });
+        storeCourses(courses.filter(item => item !== id));
         console.log("hi");
       }
 
     };
 
 
-
-    
-    // console.log(selected);
   return (
     <div>
        <div className="ag-courses_item">

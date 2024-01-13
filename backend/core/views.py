@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .serializers import CourseSerializer
+from .serializers import *
 from .serializers import FileSerializer
 from rest_framework.decorators import api_view
 from .models import Courses
@@ -12,9 +12,9 @@ from rest_framework.response import Response
 
 
 @api_view(['GET'])
-def getCourses(request):
+def getAllCourses(request):
     courses = Courses.objects.all()
-    serializer = CourseSerializer(courses,many=True)
+    serializer = AllCourseSerializer(courses,many=True)
     return Response(serializer.data)
 
 

@@ -18,15 +18,19 @@ const storeToken = (value) => {
     localStorage.removeItem('refresh_token')
   }
   
-  storeCourses = (value) => {
+  const storeCourses = (value) => {
     if (value) {
-      const { courses } = value
-      localStorage.setItem('courses', courses)
+      localStorage.setItem('choices',JSON.stringify(value))
     }
   }
+ 
 
+  const getCourses = () => {
+    let choices = localStorage.getItem('choices')
+    return JSON.parse(choices)
+  }
 
-  export { storeToken, getToken, removeToken }
+  export { storeToken, getToken, removeToken, storeCourses, getCourses }
 
 
   

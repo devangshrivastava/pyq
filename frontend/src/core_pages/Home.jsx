@@ -2,12 +2,11 @@ import { Button, CssBaseline, Grid, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { unSetUserToken } from '../features/authSlice';
-import { getToken, removeToken } from '../services/LocalStorageService';
+import { getToken, removeToken, storeCourses } from '../services/LocalStorageService';
 import { useEffect, useState } from 'react';
 import { useGetLoggedUserQuery, useChoicesQuery} from '../services/userAuthApi';
 import { setUserInfo, unsetUserInfo } from '../features/userSlice';
 import  ChangePassword  from '../user_pages/ChangePassword';
-// import { ChangePassword } from '../user_pages/ChangePassword';
 
 
 export default function Dashboard() {
@@ -24,7 +23,7 @@ export default function Dashboard() {
   const { access_token } = getToken()
   const { data, isSuccess } = useGetLoggedUserQuery(access_token)
   console.log(data);
-  const choices = useChoicesQuery(access_token)
+  
   // console.log(choices.data);
 
 
@@ -36,9 +35,11 @@ export default function Dashboard() {
   // Store User Data in Local State
   useEffect(() => {
     if (data && isSuccess) {
+      storeCourses(data.courses)
       setUserData({
         email: data.email,
         name: data.name,
+        courses: data.courses,
       })
     }
   }, [data, isSuccess])

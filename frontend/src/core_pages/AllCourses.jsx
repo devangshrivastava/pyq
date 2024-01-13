@@ -4,12 +4,9 @@ import { useAllCoursesQuery } from '../services/coreApi'
 ;
 
 export default function AllCourses() {
-    // const [courses, setCourses] = useState([])
 
-    
-    
     const courses = useAllCoursesQuery();
-    // console.log(courses);
+    console.log(courses);
     if(courses.isLoading) return <div>Loading...</div>
     if(courses.isError) return <div>Error</div>
   

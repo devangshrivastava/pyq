@@ -4,7 +4,7 @@ from django.contrib.postgres.fields import ArrayField
 # Create your models here.
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, name, courses = ["nothing"] ,password=None, password2=None):
+    def create_user(self, email, name, courses = [] ,password=None, password2=None):
     # we have used password2 here because we want to make sure that user has entered the same password in both the fields.
     # This is not a field in our model but we have used it here to validate the password.
     # This basically helps us during searliazation.
@@ -23,7 +23,7 @@ class UserManager(BaseUserManager):
 
         return user
 
-    def create_superuser(self, email, name, password=None, courses = ["nothing"]):
+    def create_superuser(self, email, name, password=None, courses = []):
         
         if not email:
             raise ValueError("Admins must have an email address")
@@ -53,7 +53,7 @@ class User(AbstractBaseUser):
     is_admin = models.BooleanField(default=False) # our user is not admin by default, this help us in creating superuser
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    courses = ArrayField(models.CharField(max_length=100), blank=True, default= ["nothing"])
+    courses = ArrayField(models.CharField(max_length=100), blank=True, default= [])
 
     
     objects = UserManager()

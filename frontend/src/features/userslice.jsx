@@ -20,9 +20,6 @@ export const userSlice = createSlice({
       state.name = action.payload.name
       state.courses = action.payload.courses;
     },
-    // setUserChoices: (state, action) => {
-    //   state.choices = action.payload.choices;
-    // },
   }
 })
 

@@ -17,6 +17,21 @@ export const coreApi = createApi({
             }
         }
       }),
+
+    courses: builder.query({
+      query: (course_id) => {
+        // console.log(course_id);
+          return {
+          url: `courses/${course_id}`,
+          method: 'GET',
+          // body : course_id_array,
+          headers: {
+              'Content-type': 'application/json',
+          }
+          }
+      }
+    }),
+
     files: builder.query({
       query: (obj) => {
         // console.log(obj);
@@ -36,4 +51,4 @@ export const coreApi = createApi({
 })
 
 
-export const { useAllCoursesQuery, useFilesQuery } = coreApi
+export const { useAllCoursesQuery, useFilesQuery, useCoursesQuery } = coreApi
