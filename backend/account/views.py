@@ -15,7 +15,7 @@ def get_tokens_for_user(user):
         'refresh': str(refresh),
         'access': str(refresh.access_token),
     }
-
+# Create your views here.
 
 class UserRegisterView(APIView):
     renderer_classes = [UserRenderer]
